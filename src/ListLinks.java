@@ -2,51 +2,59 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 
-
 import org.jsoup.Jsoup;
 import org.jsoup.helper.Validate;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNodeList;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
+
+import net.sourceforge.jwebunit.junit.WebTester;
+import net.sourceforge.jwebunit.junit.JWebUnit.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 
 /**
- * Example program to list links from a URL.
+ * Scraping eurobond table.
  */
 public class ListLinks {
     public static void main(String[] args) throws IOException {
        String TemporaryHolder="";
-       ArrayList<String> MyArrayList= new ArrayList<String>();
-       
-    	Document doc = Jsoup.connect("https://www.isbank.com.tr/fiyatoran/FiyatTabloGosterV2.asp?trkd=*EUB&tip=HTML").get();
+       String StartingUrl="https://www.isbank.com.tr/fiyatoran/FiyatTabloGosterV2.asp?trkd=*EUB&tip=HTML";
+       String EuroBondCnt="btnEuroBondDevam";
 
-Elements body = doc.getElementsByClass("table_header_grey");
-Elements links =  body.select("tr");
-	for (Element link : links)
-	{
-	
-			String Element= link.toString();
-			
-			Element = Cleaner(Element);
-			TemporaryHolder+=Element;
-			MyArrayList.add(TemporaryHolder);
-			TemporaryHolder="";
-			
-		
+	String ButtonName="WSUB";
+
+	 WebClient webClient = new WebClient();
+	 HtmlPage page = webClient.getPage(StartingUrl);
+	 HtmlForm form = page.getFormByName("frm1");
 	 
-	}
-		for(String Item : MyArrayList)
-		{
-	      	System.out.println(Item);	
-		}
-    	
+	 HtmlSubmitInput  ItemButton =  form.getInputByName(ButtonName);
+	 HtmlPage page2 = ItemButton.click();
+	 //Item is in string.
+	 String pageAsText = page.asText();
+	 String pageAsText2 = page2.asText();
 
+	System.out.println("First Page");
+	System.out.println(pageAsText);
+	System.out.println("Second Page");
+	System.out.println(pageAsText2);
+
+	        
+	        
     }
 
    
+    //Not needed thanks to HtmlUnit
  public static String Cleaner(String ItemsToBeCleaned)
  {
 
