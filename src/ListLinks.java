@@ -11,22 +11,17 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import javax.print.Doc;
 
 /**
  * Example program to list links from a URL.
  */
 public class ListLinks {
     public static void main(String[] args) throws IOException {
-       int counter=0;
        String TemporaryHolder="";
        ArrayList<String> MyArrayList= new ArrayList<String>();
        
     	Document doc = Jsoup.connect("https://www.isbank.com.tr/fiyatoran/FiyatTabloGosterV2.asp?trkd=*EUB&tip=HTML").get();
-    	String title = doc.title();
 
 Elements body = doc.getElementsByClass("table_header_grey");
 Elements links =  body.select("tr");
