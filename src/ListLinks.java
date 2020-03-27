@@ -32,30 +32,28 @@ public class ListLinks {
 	 WebClient webClient = new WebClient();
 	 HtmlPage page = webClient.getPage(StartingUrl);
 	 HtmlForm form = page.getFormByName("frm1");
-	 
 	 HtmlSubmitInput  ItemButton =  form.getInputByName(ButtonName);
-	 HtmlPage page2 = ItemButton.click();
-	 //Item is in string.
-	 String pageAsText = page.asText();
-	 String pageAsText2 = page2.asText();
-
-	System.out.println("First Page");
-    ReceivedItemsList = Cleaner(pageAsText);
-	
-    for(String Item : ReceivedItemsList)
+	 ReceivedItemsList = Cleaner(page.asText());
+	 Printer(ReceivedItemsList);
+	 
+	 while(ItemButton != null)
 	 {
-		 	System.out.println(Item);
+		 page = ItemButton.click();
+		 String pageAsText = page.asText();
+		 ReceivedItemsList = Cleaner(pageAsText);
+		 Printer(ReceivedItemsList);
+		 form = page.getFormByName("frm1");
+		 try
+		 {
+			 ItemButton= form.getInputByName(ButtonName);
+		 } 
+		 catch (Exception e)
+		 {
+			 break;
+		 } 
 	 }
-    
-    ReceivedItemsList = Cleaner(pageAsText2);
-
-    for(String Item : ReceivedItemsList)
-	 {
-		 	System.out.println(Item);
-	 }
-    	        
-    }
-
+	 
+   }
    
     //Not needed thanks to HtmlUnit
  public static  ArrayList<String> Cleaner(String ItemsToBeCleaned)
@@ -117,5 +115,14 @@ public class ListLinks {
 	 return MyItemsList2;
  }
     
-    
+ public static void Printer(ArrayList<String> ItemToBePrinted)
+{
+    	
+	    for(String Item : ItemToBePrinted)
+		 {
+			 	System.out.println(Item);
+		 }
+
+}
+ 
 }
