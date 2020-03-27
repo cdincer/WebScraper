@@ -45,11 +45,15 @@ public class ListLinks {
     for(String Item : ReceivedItemsList)
 	 {
 		 	System.out.println(Item);
-
 	 }
     
+    ReceivedItemsList = Cleaner(pageAsText2);
 
-	        
+    for(String Item : ReceivedItemsList)
+	 {
+		 	System.out.println(Item);
+	 }
+    	        
     }
 
    
@@ -58,9 +62,13 @@ public class ListLinks {
  {
 
 	 ArrayList<String> MyItemsList = new ArrayList<String>();
-     
-	// String Result="";
-	 //String[] replacements = {"<td valign=\"top\" colspan=\"1\">","<td>","</td>","<tr>","</tr>"};
+	 ArrayList<String> MyItemsList2 = new ArrayList<String>();//I will remove this when I have the energy to deal with concurrentoperation error.
+	 int counter=0;
+	 int FirstPrice,LastPrice,DateToPayment;
+	 DateToPayment=5;
+	 FirstPrice=9;//10 Table Spots
+	 LastPrice=10;//11
+	 String Result="";
 	 String[] ItemsArray = ItemsToBeCleaned.split("\\r?\\n");
 	 
 	 
@@ -71,11 +79,42 @@ public class ListLinks {
 		 	if(Item != null && !Item.isEmpty())
 		 		if(Item.charAt(0) != '*' && Character.isDigit(Item.charAt(0)))
 		 		{
+		 	    Item= Item.replace("***", "");
 		 		MyItemsList.add(Item);
 		 		}
 	 }
+	 
+	 //Attempt at preparing it for database
+	 for(String Item : MyItemsList)
+	 {
+		 Item = Item.replace("\t", " ");
+		 String[] Temp = Item.split(" ");
+		 Result="";
+		 counter=0;
+		 for(int i=0; i<Temp.length;i++)
+		 {
+			 if(counter==DateToPayment  && Temp[i].length()<3)
+			 {
+				Temp[i] = Temp[i].length() ==2 ? Temp[i].toString()+ " " : Temp[i].toString()+ "  ";
+			 }
+			 
+			 if(counter==FirstPrice || counter==LastPrice  && Temp[i].length()<7)
+			 {
+				 Temp[i]="  "+Temp[i].toString(); 
+			 }
+			 Result+=Temp[i]+"     ";
+
+			 counter++;
+		 }
+		 MyItemsList2.add(Result);
+	 }
+	 
+	 
+	 
+	 
+	 
 	
-	 return MyItemsList;
+	 return MyItemsList2;
  }
     
     
