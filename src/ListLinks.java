@@ -12,6 +12,10 @@ import net.sourceforge.jwebunit.junit.WebTester;
 import net.sourceforge.jwebunit.junit.JWebUnit.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -22,8 +26,8 @@ public class ListLinks {
        String TemporaryHolder="";
        String StartingUrl="https://www.isbank.com.tr/fiyatoran/FiyatTabloGosterV2.asp?trkd=*EUB&tip=HTML";
        String EuroBondCnt="btnEuroBondDevam";
-
-	String ButtonName="WSUB";
+	   String ButtonName="WSUB"; 
+	   ArrayList<String> ReceivedItemsList = new ArrayList<String>();
 
 	 WebClient webClient = new WebClient();
 	 HtmlPage page = webClient.getPage(StartingUrl);
@@ -36,39 +40,42 @@ public class ListLinks {
 	 String pageAsText2 = page2.asText();
 
 	System.out.println("First Page");
-	System.out.println(pageAsText);
-	System.out.println("Second Page");
-	System.out.println(pageAsText2);
+    ReceivedItemsList = Cleaner(pageAsText);
+	
+    for(String Item : ReceivedItemsList)
+	 {
+		 	System.out.println(Item);
 
-	        
+	 }
+    
+
 	        
     }
 
    
     //Not needed thanks to HtmlUnit
- public static String Cleaner(String ItemsToBeCleaned)
+ public static  ArrayList<String> Cleaner(String ItemsToBeCleaned)
  {
 
+	 ArrayList<String> MyItemsList = new ArrayList<String>();
      
-	 String Result="";
-	 String[] replacements = {"<td valign=\"top\" colspan=\"1\">","<td>","</td>","<tr>","</tr>"};
-	 for(String Item : replacements)
+	// String Result="";
+	 //String[] replacements = {"<td valign=\"top\" colspan=\"1\">","<td>","</td>","<tr>","</tr>"};
+	 String[] ItemsArray = ItemsToBeCleaned.split("\\r?\\n");
+	 
+	 
+	 //Initial cleaning up for top and bottom of tables and the bond warnings.
+	 for(String Item : ItemsArray)
 	 {
-	     ItemsToBeCleaned = ItemsToBeCleaned.replaceAll(Item, "");
+
+		 	if(Item != null && !Item.isEmpty())
+		 		if(Item.charAt(0) != '*' && Character.isDigit(Item.charAt(0)))
+		 		{
+		 		MyItemsList.add(Item);
+		 		}
 	 }
 	
-     
-     
-		String[] ItemsArray = ItemsToBeCleaned.split("\\r?\\n");
-
- 
-		 for(String SplitItem : ItemsArray)
-		 {
-			 Result+=SplitItem;
-		 }
- 
-	 
-	 return Result;
+	 return MyItemsList;
  }
     
     
