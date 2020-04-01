@@ -1,21 +1,13 @@
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.DomNodeList;
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
+
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
-import com.gargoylesoftware.htmlunit.html.HtmlTable;
 
-import net.sourceforge.jwebunit.junit.WebTester;
-import net.sourceforge.jwebunit.junit.JWebUnit.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -52,6 +44,12 @@ public class ListLinks {
 			 break;
 		 } 
 	 }
+	 
+	 /*
+	 Attempt newattempt = new Attempt();
+	 
+	 newattempt.testBasicUsage();
+	*/
 	 
    }
    
@@ -110,14 +108,12 @@ public class ListLinks {
 	 
 	 
 	 
-	 
 	
 	 return MyItemsList2;
  }
     
  public static void Printer(ArrayList<String> ItemToBePrinted)
-{
-    	
+{	
 	    for(String Item : ItemToBePrinted)
 		 {
 			 	System.out.println(Item);
@@ -125,4 +121,17 @@ public class ListLinks {
 
 }
  
+ /*Example Bond
+	Bond myBond = new Bond();
+	myBond.setBondNumber(628);
+	myBond.setBondCurrency("EUR");
+	myBond.setLastPaymentDate("22-11-2019");
+ */
+ 
+/* Example connection string
+ *    <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bondsonly" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="12345" />
+  */
 }
