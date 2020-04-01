@@ -8,14 +8,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.hibernate.entity.EntityManagerIllustrationTest;
+import org.hibernate.entity.BondInserter;
 
 
 
 /**
  * Scraping eurobond table.
  */
-public class ListLinks {
+public class MainLink {
     public static void main(String[] args) throws IOException {
        String TemporaryHolder="";
        String StartingUrl="https://www.isbank.com.tr/fiyatoran/FiyatTabloGosterV2.asp?trkd=*EUB&tip=HTML";
@@ -47,15 +47,11 @@ public class ListLinks {
 		 } 
 	 }
 	 
-	 EntityManagerIllustrationTest MyTest = new EntityManagerIllustrationTest();
+	 BondInserter MyTest = new BondInserter();
 	 
 	 MyTest.testBasicUsage();
-	 
-	 /*
-	 Attempt newattempt = new Attempt();
-	 
-	 newattempt.testBasicUsage();
-	*/
+	 MyTest.BondAdder(ReceivedItemsList);
+
 	 
    }
    

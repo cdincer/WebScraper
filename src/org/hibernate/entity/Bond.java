@@ -1,4 +1,6 @@
 package org.hibernate.entity;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,9 +14,16 @@ public class Bond {
 	
 	   String LastPaymentDate;
 	   String BondCurrency;
+	   String ItemEntered;
 	    //Other code
 	   
-	   @Id
+	@Id
+	public String getItemEntered() {
+    return ItemEntered;
+	}
+	public void setItemEntered(String itemEntered) {
+		ItemEntered = itemEntered;
+	}
 		@Column(name = "Bond_No")
 	public Integer getBondNumber() {
 		return BondNumber;
