@@ -8,6 +8,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.hibernate.entity.EntityManagerIllustrationTest;
+
 
 
 /**
@@ -44,6 +46,10 @@ public class ListLinks {
 			 break;
 		 } 
 	 }
+	 
+	 EntityManagerIllustrationTest MyTest = new EntityManagerIllustrationTest();
+	 
+	 MyTest.testBasicUsage();
 	 
 	 /*
 	 Attempt newattempt = new Attempt();

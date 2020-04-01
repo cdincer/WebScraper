@@ -1,11 +1,21 @@
 package org.hibernate.entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table( name = "Bonds" )
 public class Bond {
+	
 	   Integer BondNumber;
+	
 	   String LastPaymentDate;
 	   String BondCurrency;
 	    //Other code
+	   
+	   @Id
+		@Column(name = "Bond_No")
 	public Integer getBondNumber() {
 		return BondNumber;
 	}

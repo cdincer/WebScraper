@@ -29,5 +29,20 @@
   		<artifactId>jwebunit-htmlunit-plugin</artifactId>
   		<version>3.3</version>
   	</dependency>
+   <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.19</version>
+</dependency>
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-entitymanager</artifactId>
+    <version>5.4.13.Final</version>
+</dependency>
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.4.13.Final</version>
+</dependency>
   </dependencies>
 </project>
