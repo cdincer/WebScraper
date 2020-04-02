@@ -22,6 +22,8 @@ public class MainLink {
        String EuroBondCnt="btnEuroBondDevam";
 	   String ButtonName="WSUB"; 
 	   ArrayList<String> ReceivedItemsList = new ArrayList<String>();
+		 BondInserter MyTest = new BondInserter();
+
 
 	 WebClient webClient = new WebClient();
 	 HtmlPage page = webClient.getPage(StartingUrl);
@@ -29,7 +31,8 @@ public class MainLink {
 	 HtmlSubmitInput  ItemButton =  form.getInputByName(ButtonName);
 	 ReceivedItemsList = Cleaner(page.asText());
 	 Printer(ReceivedItemsList);
-	 
+		MyTest.BondAdder(ReceivedItemsList);
+
 	 while(ItemButton != null)
 	 {
 		 page = ItemButton.click();
@@ -47,10 +50,9 @@ public class MainLink {
 		 } 
 	 }
 	 
-	 BondInserter MyTest = new BondInserter();
 	 
-	 MyTest.testBasicUsage();
-	 MyTest.BondAdder(ReceivedItemsList);
+	// MyTest.BondAddTest();
+	MyTest.BondAdder(ReceivedItemsList);
 
 	 
    }

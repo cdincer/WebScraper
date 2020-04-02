@@ -3,6 +3,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,18 +12,29 @@ import javax.persistence.Table;
 @Table( name = "Bonds" )
 public class Bond {
 	
-	   Integer BondNumber;
-	
+	Integer IdItem;
+		
+		@Id
+		@Column(name = "TransactionId")
+		@GeneratedValue(strategy=GenerationType.AUTO)
+	    public Integer getIdItem() {
+			return IdItem;
+		}
+		public void setIdItem(Integer idItem) {
+			IdItem = idItem;
+		}
+		
+		
+	   Integer BondNumber;	
 	   String LastPaymentDate;
 	   String BondCurrency;
-	   String ItemEntered;
+	   Date ItemEntered;
 	    //Other code
 	   
-	@Id
-	public String getItemEntered() {
+	public Date getItemEntered() {
     return ItemEntered;
 	}
-	public void setItemEntered(String itemEntered) {
+	public void setItemEntered(Date itemEntered) {
 		ItemEntered = itemEntered;
 	}
 		@Column(name = "Bond_No")

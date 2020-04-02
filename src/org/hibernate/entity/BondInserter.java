@@ -44,7 +44,7 @@ public class BondInserter  {
 
 
 
-	public void testBasicUsage() {
+	public void BondAddTest() {
 		entityManagerFactory = Persistence.createEntityManagerFactory( "org.hibernate.tutorial.jpa" );
 
 		
@@ -55,7 +55,7 @@ public class BondInserter  {
 		
 		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd '-' HH:mm:ss z");
 		Date date = new Date(System.currentTimeMillis());
-		myBond.setItemEntered(formatter.format(date));
+		myBond.setItemEntered(date);
 		// create a couple of events...
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
@@ -81,7 +81,12 @@ public class BondInserter  {
 	
 	
 	public void BondAdder( ArrayList<String> MyBondList)
-	{		entityManagerFactory = Persistence.createEntityManagerFactory( "org.hibernate.tutorial.jpa" );
+	{	try {
+		entityManagerFactory = Persistence.createEntityManagerFactory( "org.hibernate.tutorial.jpa" );
+			}	 catch (Exception e)
+	 {
+				System.out.println("Single error");
+	 }
 	        EntityManager entityManager = entityManagerFactory.createEntityManager();
 	        entityManager.getTransaction().begin();
 	        
@@ -90,12 +95,18 @@ public class BondInserter  {
 	   	    {
 	   	    String[] Temp = Item.split(" ");
 	        Bond myBond = new Bond();
-			myBond.setBondNumber(104);
-			myBond.setBondCurrency("EUR");
-			myBond.setLastPaymentDate("08-06-2022");
+			myBond.setBondNumber(Integer.parseInt(Temp[0].toString()));
+			myBond.setBondCurrency(Temp[10].toString());
+			myBond.setLastPaymentDate(Temp[20].toString());
+			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd '-' HH:mm:ss z");
+			Date date = new Date(System.currentTimeMillis());
+			myBond.setItemEntered(date);
 	        entityManager.persist(myBond );
+	        
+
 	   	    }
 	        entityManager.getTransaction().commit();
+
 	        entityManager.close();
 	
 			entityManagerFactory.close();	
