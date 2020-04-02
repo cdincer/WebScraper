@@ -31,7 +31,7 @@ public class MainLink {
 	 HtmlSubmitInput  ItemButton =  form.getInputByName(ButtonName);
 	 ReceivedItemsList = Cleaner(page.asText());
 	 Printer(ReceivedItemsList);
-		MyTest.BondAdder(ReceivedItemsList);
+	 MyTest.BondAdder(ReceivedItemsList);
 
 	 while(ItemButton != null)
 	 {
@@ -39,6 +39,7 @@ public class MainLink {
 		 String pageAsText = page.asText();
 		 ReceivedItemsList = Cleaner(pageAsText);
 		 Printer(ReceivedItemsList);
+		 MyTest.BondAdder(ReceivedItemsList);
 		 form = page.getFormByName("frm1");
 		 try
 		 {
@@ -52,7 +53,6 @@ public class MainLink {
 	 
 	 
 	// MyTest.BondAddTest();
-	MyTest.BondAdder(ReceivedItemsList);
 
 	 
    }
@@ -102,7 +102,7 @@ public class MainLink {
 			 {
 				 Temp[i]="  "+Temp[i].toString(); 
 			 }
-			 Result+=Temp[i]+"     ";
+			 Result+=Temp[i]+" ";
 
 			 counter++;
 		 }
