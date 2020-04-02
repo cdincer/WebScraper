@@ -26,12 +26,14 @@ public class Bond {
 		
 		
 	   Integer BondNumber;	
-	   String NextPaymentDate;
+	   Date NextPaymentDate;
 	   String BondCurrency;
 	   Date ItemEntered;
 	   Double BankBuy;
 	   Double BankSell;
 	   Double InterestRate;
+	   Date EndOfBond;
+
 
 	    //Other code
 	   
@@ -48,10 +50,10 @@ public class Bond {
 	public void setBondNumber(Integer bondNumber) {
 		BondNumber = bondNumber;
 	}
-	public String getNextPaymentDate() {
+	public Date getNextPaymentDate() {
 		return NextPaymentDate;
 	}
-	public void setNextPaymentDate(String nextPaymentDate) {
+	public void setNextPaymentDate(Date nextPaymentDate) {
 		NextPaymentDate = nextPaymentDate;
 	}
 	public String getBondCurrency() {
@@ -77,6 +79,12 @@ public class Bond {
 	}
 	public void setInterestRate(Double interestRate) {
 		InterestRate = interestRate;
+	}
+	public Date getEndOfBond() {
+		return EndOfBond;
+	}
+	public void setEndOfBond(Date endOfBond) {
+		EndOfBond = endOfBond;
 	}
 
 }

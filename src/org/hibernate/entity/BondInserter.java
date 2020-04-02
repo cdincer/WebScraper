@@ -23,6 +23,8 @@
  */
 package org.hibernate.entity;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,9 +55,8 @@ public class BondInserter  {
 		myBond.setBondCurrency("EUR");
 		Date date = new Date(System.currentTimeMillis());
 
-		myBond.setNextPaymentDate("01/02/2023");
+		myBond.setNextPaymentDate(date);
 		
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd '-' HH:mm:ss z");
 		myBond.setItemEntered(date);
 		// create a couple of events...
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -100,19 +101,30 @@ public class BondInserter  {
 	 
 	        Bond myBond = new Bond();
 			myBond.setBondNumber(Integer.parseInt(Temp[0].toString()));
+			Date Date2 = DateTransformer(Temp[1].toString());
+			myBond.setEndOfBond(Date2);
 			myBond.setBondCurrency(Temp[2].toString());
-			myBond.setNextPaymentDate(Temp[4].toString());
+			
+			//Format Payment Date
+		    String sDate1=Temp[4].toString();  
+		    SimpleDateFormat formatter1 =new SimpleDateFormat("dd/MM/yyyy");  
+		    Date Date1 = new Date();
+		    try {
+				 Date1 = formatter1.parse(sDate1);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			myBond.setNextPaymentDate(Date1);
 			
 			//Interest Rate : for comparing good interest rates.
 			String itemSanitization =  Temp[6].toString();		
 			itemSanitization = itemSanitization.isBlank()  ?  Temp[7].toString() : Temp[6].toString();
 
-			if(!itemSanitization.isEmpty() && !itemSanitization.isBlank())
-			{
 			itemSanitization =itemSanitization.replace(",","");
 			myBond.setInterestRate(Double.parseDouble(itemSanitization));
-			}
 			
+	
 			
 			if(Temp.length>13) 
 			{
@@ -148,18 +160,33 @@ public class BondInserter  {
 				myBond.setBankSell(Double.parseDouble(itemSanitization));
 				}
 			}
-
-			
-	
 			
 			
+			if(Temp[0].toString().equals("680") || Temp[0].toString().equals("666"))
+			{
+				//Bank buys
+				itemSanitization =  Temp[11].toString();
+					if(!itemSanitization.isEmpty() && !itemSanitization.isBlank()) 
+					{
+					itemSanitization =itemSanitization.replace(",","");
+					myBond.setBankBuy( Double.parseDouble(itemSanitization));
+					}
 			
+					//Bank Sells
+					itemSanitization =  Temp[12].toString();			
+					if(!itemSanitization.isEmpty() && !itemSanitization.isBlank())
+					{
+					itemSanitization =itemSanitization.replace(",","");
+					myBond.setBankSell(Double.parseDouble(itemSanitization));
+				
+			        }
+			}
+		
 			//SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd '-' HH:mm:ss z");
 			Date date = new Date(System.currentTimeMillis());
 			myBond.setItemEntered(date);
 	        entityManager.persist(myBond );
 	        
-
 	   	    }
 	        entityManager.getTransaction().commit();
 
@@ -169,4 +196,22 @@ public class BondInserter  {
 	}
 	
 	
+	
+	public Date DateTransformer(String DateOut)
+	{
+		String Result = DateOut;
+		
+		Result = Result.replaceAll("-", "");
+		
+			String sDate1=Result.toString();  
+		    SimpleDateFormat formatter1 =new SimpleDateFormat("dd/MM/yyyy");  
+		    Date Date1 = new Date();
+		    try {
+				 Date1 = formatter1.parse(sDate1);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	return Date1;
+	}
 }
