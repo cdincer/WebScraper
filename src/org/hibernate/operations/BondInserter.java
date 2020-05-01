@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor
  * Boston, MA  02110-1301  USA
  */
-package org.hibernate.entity;
+package org.hibernate.operations;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -34,13 +34,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
+import org.hibernate.entity.Bond;
+
 import junit.framework.TestCase;
 
-/**
- * Illustrates basic use of Hibernate as a JPA provider.
- *
- * @author Steve Ebersole
- */
+
 public class BondInserter  {
 	private EntityManagerFactory entityManagerFactory;
 
@@ -58,14 +56,12 @@ public class BondInserter  {
 		myBond.setNextPaymentDate(date);
 		
 		myBond.setItemEntered(date);
-		// create a couple of events...
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(myBond );
 		entityManager.getTransaction().commit();
 		entityManager.close();
 
-		// now lets pull events from the database and list them
 		entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
         List<Bond> result = entityManager.createQuery( "from Bond",Bond.class).getResultList();
