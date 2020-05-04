@@ -44,5 +44,34 @@
     <artifactId>hibernate-core</artifactId>
     <version>5.4.13.Final</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14 -->
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-jdk14</artifactId>
+    <version>1.6.0</version>
+    <scope>test</scope>
+</dependency>
+<!-- https://mvnrepository.com/artifact/net.sourceforge.jwebunit/jwebunit-htmlunit-plugin -->
+<dependency>
+    <groupId>net.sourceforge.jwebunit</groupId>
+    <artifactId>jwebunit-htmlunit-plugin</artifactId>
+    <version>3.3</version>
+    <scope>test</scope>
+</dependency>
+<!-- https://mvnrepository.com/artifact/net.sourceforge.jwebunit/jwebunit-core -->
+<dependency>
+    <groupId>net.sourceforge.jwebunit</groupId>
+    <artifactId>jwebunit-core</artifactId>
+    <version>3.3</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/net.sourceforge.htmlunit/htmlunit -->
+<dependency>
+    <groupId>net.sourceforge.htmlunit</groupId>
+    <artifactId>htmlunit</artifactId>
+    <version>2.40.0</version>
+</dependency>
+
+
   </dependencies>
 </project>
