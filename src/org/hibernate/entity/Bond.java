@@ -14,9 +14,14 @@ public class Bond {
 	
 	Integer IdItem;
 		
+	//Use table generator initial value for using with sample data
+	//@TableGenerator(initialValue = 10000)
+	
+	
 		@Id
 		@Column(name = "TransactionId")
 		@GeneratedValue(strategy=GenerationType.AUTO)
+	  
 	    public Integer getIdItem() {
 			return IdItem;
 		}
