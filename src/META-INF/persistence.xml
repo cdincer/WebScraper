@@ -38,7 +38,9 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bondsonly" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="12345" />
-
+   		    <!-- For linux password use the value below: -->
+   		    <!-- value="1491"-->
+   		    
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
         </properties>
